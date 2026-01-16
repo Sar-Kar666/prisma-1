@@ -1,12 +1,22 @@
-import express from 'express';
-import type { Request, Response } from 'express';
-const app = express();
-app.use(express.json());
+// import express from 'express';
+// import type { Request, Response } from 'express';
+// const app = express();
+// app.use(express.json());
 
-app.get("/",(req:Request,res:Response)=>{
+import { prisma } from './prisma';
 
-    res.send("hello")
 
-})
+  async function main(){
+    const user = await  prisma.user.findFirst({
+   where:{
+    id: 5
+   },
+   include:{
+    todos:true
+   }
+    })
+    console.log(user)
 
-app.listen(3000);
+  }
+  
+  main();
